@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -9,10 +8,7 @@ import (
 )
 
 func main() {
-	src, err := readInput()
-	if err != nil {
-		fail(err)
-	}
+	src := readInput()
 	fmt.Println(wordCount(src))
 }
 
@@ -25,13 +21,10 @@ func wordCount(src string) int {
 
 // readInput reads pattern and source string
 // from command line arguments and returns them.
-func readInput() (src string, err error) {
+func readInput() (src string) {
 	flag.Parse()
 	src = strings.Join(flag.Args(),"")
-	if src == "" {
-		return src, errors.New("missing string to count")
-	}
-	return src, nil
+	return src
 }
 
 // fail prints the error and exits.
